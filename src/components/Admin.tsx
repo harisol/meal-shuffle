@@ -1,5 +1,5 @@
 import { useState, FormEvent, useRef } from 'react';
-import { addMeal, IMeal } from './services/meal.service';
+import { addMeal, IMeal } from '../services/meal.service';
 
 type Props = {
   refreshMeal: () => void;

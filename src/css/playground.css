@@ -1,0 +1,47 @@
+body {
+    background: #081229;
+}
+
+div, span, p, h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+}
+
+a {
+    color: #ffa704;
+}
+
+a:hover {
+    color: #d38a03;
+}
+
+.playground-header {
+    display: flex;
+    align-items: center;
+    margin-top: -1rem;
+}
+
+.playground-body {
+    display: flex;
+    min-height: 80%;
+    border: solid 1px #4f6294;
+    border-radius: 10px;
+}
+
+.main-content {
+    padding: 10px;
+    min-width: 318px;
+}
+
+@media screen and (min-width: 720px) {
+    .main-content {
+        min-width: 480px;
+    }
+}
+
+.navigation {
+    min-width: 100px;
+    margin: 0;
+    padding-top: 10px;
+    border-right: solid 1px #4f6294;
+    padding-right: 10px;
+}

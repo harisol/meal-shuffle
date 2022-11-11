@@ -24,6 +24,11 @@
   display: none;
 }
 
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -37,7 +42,7 @@ body {
   margin: 0;
   display: flex;
   /* place-items: center; */
-  min-width: 320px;
+  /* min-width: 320px; */
   min-height: 100vh;
 }
 
@@ -48,18 +53,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f0182f;
-  color: #fff;
   cursor: pointer;
   transition: border-color 0.25s;
   font-weight: bold;
 }
-button:hover {
-  background-color: #e1182c;
-}
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border: 1.5px solid transparent;
 }
 
 input {

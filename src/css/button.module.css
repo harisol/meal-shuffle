@@ -1,0 +1,13 @@
+.fade {
+  transition: opacity 2s;
+}
+
+.red {
+  background-color: #f0182f;
+  color: #fff;
+}
+
+.red:hover {
+  background-color: #e1182c;
+}
+

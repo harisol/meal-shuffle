@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import Admin from './Admin';
-import './App.css';
-import { fetchMeal, IMeal } from './services/meal.service';
+import { fetchMeal, IMeal } from '../services/meal.service';
 
-function App() {
+import '../css/meal-shuffle.css';
+import btnStyle from '../css/button.module.css';
+
+export default function MealShuffle() {
   const [section, setSection] = useState('shuffle');
   const [meals, setMeals] = useState<IMeal[]>([]);
   const [randomMeal, setRandomMeal] = useState<IMeal | null>(null);
@@ -50,7 +52,11 @@ function App() {
             </strong>
           </div>
         )}
-        <button onClick={shuffleMeal} style={{ marginTop: '5px' }}>
+        <button
+          onClick={shuffleMeal}
+          className={btnStyle.red}
+          style={{ marginTop: '5px' }}
+        >
           🗘 Shuffle
         </button>
       </div>
@@ -79,7 +85,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="meal-shuffle-page">
       <div className="title-box">
         <span onClick={() => setSection('shuffle')}>Random</span>{' '}
         <span onClick={() => setSection('catalog')}>Catalog</span>
@@ -88,5 +94,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

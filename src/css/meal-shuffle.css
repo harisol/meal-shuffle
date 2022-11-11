@@ -1,7 +1,10 @@
-#root {
-  margin: 0 auto;
-  padding: 2rem;
+.meal-shuffle-page {
   text-align: center;
+}
+
+.center-block {
+  display: block;
+  margin: 0 auto;
 }
 
 .logo {
