@@ -1,5 +1,5 @@
 import { collection, getDocs, addDoc } from 'firebase/firestore/lite';
-import { myFirestore as db } from './firebase.service';
+import db from './firebase.service';
 import { isValidHttpUrl } from '../../etc/helper';
 
 export interface IMeal {
@@ -17,17 +17,18 @@ export const fetchMeal = async () => {
 export const addMeal = async (payload: IMeal) => {
   // validation
   const isValid = payload.name && isValidHttpUrl(payload.imageUrl);
-  
+
+  /* eslint-disable no-console */
   try {
     if (!isValid) {
-      throw 'Invalid data!';
-    };
+      throw new Error('Invalid data!');
+    }
 
     const docRef = await addDoc(collection(db, 'meals'), payload);
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e: any) {
+    console.info('Document written with ID: ', docRef.id);
+  } catch (e) {
     console.error('Error adding document: ', e);
-    return e?.message || e;
+    return e instanceof Error ? e.message : e;
   }
 
   return true;

@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import inlineCSS from '../css/playground.css?inline';
 import btnStyle from '../css/button.module.css';
 import viteLogo from '../assets/logo-with-shadow.png';
-import { useEffect } from 'react';
 
 const cssId = 'css-page-playground';
 
@@ -41,13 +41,13 @@ const Navigation = () => {
   return (
     <ul className="navigation">
       <li>
-        <Link to={`/playground`}>Page 1</Link>
+        <Link to="/playground">Page 1</Link>
       </li>
       <li>
-        <Link to={`/playground/2`}>Page 2</Link>
+        <Link to="/playground/2">Page 2</Link>
       </li>
       <li>
-        <Link to={`/`}>Meal Shuffle</Link>
+        <Link to="/">Meal Shuffle</Link>
       </li>
     </ul>
   );
@@ -56,6 +56,7 @@ const Navigation = () => {
 const FadingButton = () => {
   return (
     <button
+      type="button"
       className={`${btnStyle.fade} ${btnStyle.red}`}
       style={{ marginLeft: 'auto' }}
       onClick={(e) => {
@@ -65,8 +66,7 @@ const FadingButton = () => {
       onTransitionEnd={(e) => {
         // must be combined with css 'transition'
         e.currentTarget.style.display = 'none';
-      }}
-    >
+      }}>
       Don't click me!
     </button>
   );

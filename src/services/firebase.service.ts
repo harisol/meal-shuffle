@@ -4,8 +4,7 @@ import { getFirestore } from 'firebase/firestore/lite';
 // import { } from 'firebase/<service>';
 
 const app = initializeApp({
-  projectId: 'meal-shuffle-hrsl',
+  projectId: 'meal-shuffle-hrsl'
 });
 
-export const myFirestore = getFirestore(app);
-
+export default getFirestore(app);

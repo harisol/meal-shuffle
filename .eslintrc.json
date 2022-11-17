@@ -1,0 +1,49 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": ["./tsconfig.json"]
+    },
+    "extends": [
+        /**
+         * Extending 'airbnb' config also attached theese plugin out of the box:
+         * 'react', 'react-hooks', 'jsx-a11y', 'import' (the rest can be seen in its rules folder).
+         * So we don't have to manually register thoose plugin
+         */
+        "airbnb",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
+        /**
+         * Attach eslint-plugin-prettier and enable eslint-config-prettier.
+         * This will display prettier errors as ESLint errors.
+         * Make sure this is always the last configuration in the extends array.
+         */
+        "plugin:prettier/recommended"
+    ],
+    // tell ESlint to not lint theese files
+    "ignorePatterns": ["server/*.js"],
+    "rules": {
+        "no-use-before-define": "off",
+        "no-unused-expressions": "off",
+        /* let typescript compiler handle theese import rules */
+        "import/extensions": "off",
+        "import/no-unresolved": "off",
+        "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
+        "react/react-in-jsx-scope": "off", // suppress errors for missing 'import React' in files
+        "react/destructuring-assignment": "off", // we use typescript bro! no need to destructuring props anymore
+        "react/function-component-definition": ["warn", {
+            "namedComponents": ["function-declaration", "arrow-function"],
+            "unnamedComponents": "arrow-function"
+        }],
+        "react/no-unescaped-entities": "off",
+        "react/jsx-props-no-spreading": "off"
+    }
+}

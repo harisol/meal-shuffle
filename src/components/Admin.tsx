@@ -1,11 +1,11 @@
-import { useState, FormEvent, useRef } from 'react';
+import { useState, FormEvent, useRef, LegacyRef } from 'react';
 import { addMeal, IMeal } from '../services/meal.service';
 
 type Props = {
   refreshMeal: () => void;
 };
 
-function Admin({ refreshMeal }: Props) {
+function Admin(props: Props) {
   const [formData, setFormData] = useState<IMeal>(defaultFormValue);
   const [loggedIn, setLoggedIn] = useState(false);
   const password = useRef<HTMLInputElement | null>(null);
@@ -14,29 +14,20 @@ function Admin({ refreshMeal }: Props) {
     password?.current?.value === adminKey && setLoggedIn(true);
   };
 
-  const LoginForm = () => {
-    return (
-      <input
-        type="password"
-        placeholder="password"
-        ref={password}
-        className="input-block"
-        onChange={isPasswordMatch}
-      />
-    );
-  };
-
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const result = await addMeal(formData);
+    const result = (await addMeal(formData)) as boolean;
 
     if (result !== true) {
+      // eslint-disable-next-line no-alert
       alert(result);
       return;
     }
 
     setFormData(defaultFormValue);
-    refreshMeal();
+    props.refreshMeal();
+
+    // eslint-disable-next-line no-alert
     alert('Success add meal!');
   };
 
@@ -44,7 +35,7 @@ function Admin({ refreshMeal }: Props) {
     <div className="card">
       <h1>Add New Meal</h1>
       {!loggedIn ? (
-        <LoginForm />
+        <LoginForm propRef={password} changeHandler={isPasswordMatch} />
       ) : (
         <form onSubmit={submitForm}>
           <input
@@ -59,9 +50,7 @@ function Admin({ refreshMeal }: Props) {
             placeholder="Image url"
             value={formData.imageUrl}
             className="input-block"
-            onChange={(e) =>
-              setFormData({ ...formData, imageUrl: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
           />
           <button type="submit">Submit</button>
         </form>
@@ -70,9 +59,25 @@ function Admin({ refreshMeal }: Props) {
   );
 }
 
+type LoginFormProps = {
+  propRef: LegacyRef<HTMLInputElement> | null;
+  changeHandler: () => void;
+};
+const LoginForm = (props: LoginFormProps) => {
+  return (
+    <input
+      type="password"
+      placeholder="password"
+      ref={props.propRef}
+      className="input-block"
+      onChange={props.changeHandler}
+    />
+  );
+};
+
 const defaultFormValue = {
   name: '',
-  imageUrl: '',
+  imageUrl: ''
 };
 
 const adminKey = '1112';
