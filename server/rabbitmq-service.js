@@ -10,8 +10,15 @@ export const createConnection = async () => {
   return (connection = await amqplib.connect(rabbitHost));
 };
 
+const checkConnection = () => {
+  if (!connection) {
+    throw new Error('RabbitMQ is not connected')
+  }
+}
+
 export const sendMessage = (content) => {
   // Create a channel
+  checkConnection();
   connection.createChannel().then(async (channel) => {
     // Makes the queue available to the client
     await channel.assertQueue(myQueue, { durable: true });
@@ -25,6 +32,7 @@ export const sendMessage = (content) => {
 
 export const subscribe = () => {
   // Create a channel
+  checkConnection();
   connection.createChannel().then(async (channel) => {
     // Makes the queue available to the client
     await channel.assertQueue(myQueue, { durable: true });
