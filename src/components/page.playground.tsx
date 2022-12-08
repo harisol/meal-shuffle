@@ -47,6 +47,9 @@ const Navigation = () => {
         <Link to="/playground/2">Page 2</Link>
       </li>
       <li>
+        <Link to="/playground/3">Page 3</Link>
+      </li>
+      <li>
         <Link to="/">Meal Shuffle</Link>
       </li>
     </ul>

@@ -1,10 +1,11 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
-// Follow this pattern to import other Firebase services
-// import { } from 'firebase/<service>';
+import { getStorage } from 'firebase/storage';
 
 const app = initializeApp({
-  projectId: 'meal-shuffle-hrsl'
+  projectId: 'meal-shuffle-hrsl',
+  storageBucket: 'gs://meal-shuffle-hrsl.appspot.com'
 });
 
-export default getFirestore(app);
+export const myFirestore = getFirestore(app);
+export const myFileStorage = getStorage(app);

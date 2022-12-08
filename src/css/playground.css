@@ -15,14 +15,40 @@ a:hover {
 }
 
 .input-block label,
-.input-block input,
+.input-block input:not([type="radio"]):not([type="checkbox"]),
 .input-block select,
 .input-block textarea {
     display: block;
 }
 
+.input-block input[type="file"] {
+    width: 166px;
+}
+
+.input-block textarea {
+    width: calc(100% - 20px); /* because padding is 0.5rem */
+}
+
 .input-block label {
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
+}
+
+.input-block .radio-checkbox-container {
+    margin-bottom: 21.5px;
+}
+.input-block .radio-name,
+.input-block .select-name {
+    margin: 0;
+    text-transform: capitalize;
+}
+.input-block .radio-checkbox-group {
+    display: flex;
+    gap: 20px;
+    padding: 2.5px;
+    text-transform: capitalize;
+}
+.input-block .radio-checkbox-group label {
+    margin-bottom: 0;
 }
 
 .field-error {
@@ -33,19 +59,25 @@ a:hover {
 .playground-header {
     display: flex;
     align-items: center;
-    margin-top: -1rem;
+    margin-top: 2rem;
 }
 
 .playground-body {
     display: flex;
-    min-height: 80%;
     border: solid 1px #4f6294;
     border-radius: 10px;
+    margin-bottom: 20px;
+    min-height: calc(100vh - 155px);
 }
 
 .main-content {
     padding: 10px;
-    min-width: 318px;
+}
+
+@media screen and (min-width: 550px) {
+    .main-content {
+        min-width: 318px;
+    }
 }
 
 @media screen and (min-width: 720px) {
@@ -98,4 +130,19 @@ a:hover {
 .modal-button {
     display: block;
     margin: 0 auto;
+}
+
+.logos {
+    padding: 10px;
+    background: #dfdfdf;
+    width: 500px;
+}
+
+.logos img {
+    width: 15%;
+    margin: 0 10px;
+    border: solid 1px grey;
+    aspect-ratio: 3/4;
+    object-fit: contain;
+    mix-blend-mode: darken;
 }

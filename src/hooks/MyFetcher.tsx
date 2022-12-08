@@ -1,43 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function useMyFetcher(): FetchState {
-  const [x, setX] = useState(initialState);
-  useEffect(() => {
-    if (x.state !== 'loading') {
-      return;
-    }
-
-    fetch(x.url)
-      .then((res) => res.json())
-      .then((data) => {
-        setX((v) => {
-          return { ...v, data };
-        });
-      })
-      .finally(() => {
-        setX((v) => {
-          return { ...v, state: 'iddle' };
-        });
-      });
-  }, [x]);
+  const [status, setStatus] = useState('iddle');
 
   const load = (url: string) => {
-    setX((v) => {
-      return { ...v, state: 'loading', url };
-    });
+    setStatus('loading');
+
+    return fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.status.toString());
+        }
+        return res.json();
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-alert
+        alert(`failed when open ${url}.\nerror: ${err.message || err}`);
+      })
+      .finally(() => {
+        setStatus('iddle');
+      });
   };
 
-  return { ...x, load };
+  return { status, load };
 }
 
-const initialState = {
-  state: 'idle',
-  data: null,
-  url: ''
-};
-
 type FetchState = {
-  state: string;
-  data: unknown;
-  load: (url: string) => void;
+  status: string;
+  load: (url: string) => Promise<unknown>;
 };

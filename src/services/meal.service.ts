@@ -1,5 +1,5 @@
 import { collection, getDocs, addDoc } from 'firebase/firestore/lite';
-import db from './firebase.service';
+import { myFirestore } from './firebase.service';
 import { isValidHttpUrl } from '../../etc/helper';
 
 export interface IMeal {
@@ -8,7 +8,7 @@ export interface IMeal {
 }
 
 export const fetchMeal = async () => {
-  const col = collection(db, 'meals');
+  const col = collection(myFirestore, 'meals');
   const snapshot = await getDocs(col);
 
   return snapshot.docs.map((doc) => doc.data());
@@ -24,10 +24,10 @@ export const addMeal = async (payload: IMeal) => {
       throw new Error('Invalid data!');
     }
 
-    const docRef = await addDoc(collection(db, 'meals'), payload);
-    console.info('Document written with ID: ', docRef.id);
+    const docRef = await addDoc(collection(myFirestore, 'meals'), payload);
+    console.info('Document written with ID:', docRef.id);
   } catch (e) {
-    console.error('Error adding document: ', e);
+    console.error('Error adding document;', e);
     return e instanceof Error ? e.message : e;
   }
 

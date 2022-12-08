@@ -29,7 +29,7 @@
         "plugin:prettier/recommended"
     ],
     // tell ESlint to not lint theese files
-    "ignorePatterns": ["server/*.js"],
+    "ignorePatterns": ["server/*"],
     "rules": {
         "no-use-before-define": "off",
         "no-unused-expressions": "off",
